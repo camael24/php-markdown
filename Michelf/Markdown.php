@@ -974,6 +974,8 @@ class Markdown implements MarkdownInterface {
 	# Create a code span markup for $code. Called from handleSpanToken.
 	#
 		$code = htmlspecialchars(trim($code), ENT_NOQUOTES);
+         if (strtolower(substr($code, 0, 3)) === 'php')
+            $code = highlight_string('<?php' . substr($code, 3), true);
 		return $this->hashPart("<code>$code</code>");
 	}
 
